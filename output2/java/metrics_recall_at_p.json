@@ -1,0 +1,13 @@
+{
+  "file": "output2/java/pr_curve.csv",
+  "has_threshold": true,
+  "results": [
+    {
+      "target_precision": 0.9,
+      "recall_at_precision_step": 1.0,
+      "threshold_at_precision_step": 0.6211114525794983,
+      "recall_at_precision_envelope": 1.0,
+      "threshold_at_precision_envelope": 0.6211114525794983
+    }
+  ]
+}

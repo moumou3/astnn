@@ -1,0 +1,21 @@
+{
+  "used_threshold": 0.47854,
+  "precision": 0.12214052287581699,
+  "recall": 0.8820058997050148,
+  "f1": 0.214567635450305,
+  "confusion_matrix": {
+    "tn": 2012,
+    "fp": 2149,
+    "fn": 40,
+    "tp": 299
+  },
+  "num_pairs_total": 4500,
+  "num_pairs_scored": 4500,
+  "skipped_pairs": 0,
+  "best_on_mysql": {
+    "threshold": 0.5576288104057312,
+    "precision": 0.35731414868105515,
+    "recall": 0.43952802359882004,
+    "f1": 0.3941798941798942
+  }
+}

@@ -1,0 +1,32 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[requires]
+# pipenv が 3.6.7 の仮想環境を使うように
+
+[packages]
+pandas = "*"
+scikit-learn = "*"
+pycparser = "*"
+javalang = "*"
+scipy = "*"
+tqdm = "*"
+click = "*"
+torch = "*"
+torchvision = "*"
+numpy = "*"
+gensim = "*"
+tree-sitter = "0.20.4"
+tree-sitter-languages = "1.7.0"
+transformers = "*"
+
+[scripts]
+# 便利コマンド例
+pipeline-c = "python clone/pipeline.py --lang c"
+pipeline-java = "python clone/pipeline.py --lang java"
+train-c = "python clone/train.py --lang c"
+train-java = "python clone/train.py --lang java"
+
+[dev-packages]

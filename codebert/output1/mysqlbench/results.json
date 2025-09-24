@@ -1,0 +1,22 @@
+{
+  "n_pairs": 4500,
+  "n_skipped": 0,
+  "mode": "crossencoder",
+  "model_id": "microsoft/codebert-base",
+  "model_pt": "codebert/output1/clf_best.pt",
+  "tau_fixed": 0.901,
+  "pr_auc": 0.2866997823886804,
+  "tau_f1": 0.4670051336288452,
+  "f1_max": 0.4326923076923077,
+  "precision_at_tau_f1": 0.4343629343629344,
+  "recall_at_tau_f1": 0.43103448275862066,
+  "tp_at_tau_f1": 225,
+  "fp_at_tau_f1": 293,
+  "fn_at_tau_f1": 297,
+  "precision_at_tau_fixed": 0.38596491228070173,
+  "recall_at_tau_fixed": 0.0421455938697318,
+  "f1_at_tau_fixed": 0.07599309153713299,
+  "tp_at_tau_fixed": 22,
+  "fp_at_tau_fixed": 35,
+  "fn_at_tau_fixed": 500
+}

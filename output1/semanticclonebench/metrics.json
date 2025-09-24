@@ -1,0 +1,24 @@
+{
+  "num_functions_kept": 371,
+  "total_gold_pairs": 57,
+  "num_pred_pairs_in": 388,
+  "num_pred_pairs_resolved": 44,
+  "pr_auc": 0.621832550935316,
+  "best_f1": {
+    "threshold": 0.0304856747388839,
+    "precision": 0.8409090909090909,
+    "recall": 0.6491228070175439,
+    "f1": 0.7326732673267327,
+    "tp": 37,
+    "fp": 7,
+    "fn": 20
+  },
+  "f1_95_band": {
+    "f_min": 0.7021276595744681,
+    "f_max": 0.7326732673267327,
+    "threshold_min": 0.0304856747388839,
+    "threshold_max": 0.1483321040868759,
+    "ratio": 0.95
+  },
+  "note": "Gold = all function pairs within the same file (function length > min_lines). Resolved with: gold derived by two-per-file assumption: file_id=(id-1)//2; function length computed from programs.pkl as non-empty line count. Predictions outside the gold universe are dropped."
+}

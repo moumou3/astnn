@@ -1,0 +1,20 @@
+{
+  "used_threshold": 0.6211114525794983,
+  "precision": 0.9943181818181818,
+  "recall": 1.0,
+  "f1": 0.9971509971509972,
+  "pr_auc": 0.9920111268958998,
+  "best_f1": {
+    "threshold": 0.6211114525794983,
+    "precision": 0.9943181818181818,
+    "recall": 1.0,
+    "f1": 0.9971509971509972
+  },
+  "num_resolved_pairs": 901,
+  "pairs_dropped_no_label": 0,
+  "recall_at_target_precision": 0.9,
+  "recall_at_precision_step": 1.0,
+  "threshold_at_target_precision": 0.6211114525794983,
+
+  "note": "If threshold is omitted, metrics are computed at best-F1 (reported separately) only for reference; use a fixed threshold from training/validation for fair evaluation."
+}

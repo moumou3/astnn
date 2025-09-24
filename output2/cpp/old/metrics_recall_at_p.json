@@ -1,0 +1,13 @@
+{
+  "file": "output2/cpp/pr_curve.csv",
+  "has_threshold": true,
+  "results": [
+    {
+      "target_precision": 0.9,
+      "recall_at_precision_step": 0.9573170731707316,
+      "threshold_at_precision_step": 0.417226493358612,
+      "recall_at_precision_envelope": 0.9573170731707316,
+      "threshold_at_precision_envelope": 0.417226493358612
+    }
+  ]
+}

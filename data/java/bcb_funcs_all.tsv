@@ -1,0 +1,2325 @@
+1	"class Algo {
+public static int binary_search(int[] a, int n, int x) {
+    if (a == null || n <= 0) return -1;
+    int low = 0, high = Math.min(n, a.length) - 1;
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+        int val = a[mid];
+        if (val == x) return mid;
+        if (val < x) low = mid + 1;
+        else high = mid - 1;
+    }
+    return -1;
+}
+}
+"
+2	"class Algo {
+public static int binary_search(final int[] a, int n, int x) {
+    if (a == null || n <= 0) return -1;
+    int lo = 0;
+    int hi = Math.min(n, a.length) - 1;
+    while (lo <= hi) {
+        int mid = lo + ((hi - lo) >>> 1);
+        int v = a[mid];
+        if (v < x) {
+            lo = mid + 1;
+        } else if (v > x) {
+            hi = mid - 1;
+        } else {
+            return mid;
+        }
+    }
+    return -1;
+}
+}
+"
+3	"public class Algo {
+    public static int binary_search(int[] a, int n, int x) {
+        int low = 0, high = n - 1;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            int val = a[mid];
+            if (val == x) return mid;
+            if (val < x) low = mid + 1;
+            else high = mid - 1;
+        }
+        return -1;
+    }
+}
+"
+4	"public class Algo {
+    public static int binary_search(int[] a, int n, int x) {
+        int low = 0;
+        int high = n - 1;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            int v = a[mid];
+            if (v == x) {
+                return mid;
+            } else if (v < x) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+        return -1;
+    }
+}
+"
+5	"class Algo {
+public static int binary_search(int[] a, int n, int x) {
+    int lo = 0, hi = n - 1;
+    while (lo <= hi) {
+        int mid = lo + ((hi - lo) >>> 1);
+        int val = a[mid];
+        if (x < val) {
+            hi = mid - 1;
+        } else if (x > val) {
+            lo = mid + 1;
+        } else {
+            return mid;
+        }
+    }
+    return -1;
+}
+}
+"
+6	"class Algo {
+public static int binary_search(final int[] a, int n, int x) {
+    int lo = 0, hi = n - 1;
+    while (lo <= hi) {
+        int mid = lo + ((hi - lo) >>> 1);
+        int v = a[mid];
+        if (v < x) {
+            lo = mid + 1;
+        } else if (v > x) {
+            hi = mid - 1;
+        } else {
+            return mid;
+        }
+    }
+    return -1;
+}
+}
+"
+7	"class Algo {
+public static int binary_search(int[] a, int n, int x) {
+    java.util.function.IntBinaryOperator[] f = new java.util.function.IntBinaryOperator[1];
+    f[0] = (lo, hi) -> {
+        if (lo > hi) return -1;
+        int mid = lo + ((hi - lo) >>> 1);
+        if (a[mid] == x) return mid;
+        return a[mid] < x ? f[0].applyAsInt(mid + 1, hi) : f[0].applyAsInt(lo, mid - 1);
+    };
+    return n <= 0 ? -1 : f[0].applyAsInt(0, n - 1);
+}
+}
+"
+8	"class Algo {
+public static int binary_search(int[] a, int n, int x) {
+    int l = 0, r = n - 1;
+    while (l <= r) {
+        int m = l + ((r - l) >>> 1);
+        int v = a[m];
+        if (v == x) return m;
+        if (v < x) l = m + 1;
+        else r = m - 1;
+    }
+    return -1;
+}
+}
+"
+9	"class Algo {
+public static int gcd(int a, int b) {
+    long x = a;
+    long y = b;
+    if (x < 0) x = -x;
+    if (y < 0) y = -y;
+    while (y != 0) {
+        long t = x % y;
+        x = y;
+        y = t;
+    }
+    if (x > Integer.MAX_VALUE) return Integer.MIN_VALUE;
+    return (int) x;
+}
+}
+"
+10	"class Algo {
+public static int gcd(int a, int b) {
+    long x = a;
+    long y = b;
+    if (x < 0) x = -x;
+    if (y < 0) y = -y;
+    while (y != 0) {
+        long t = x % y;
+        x = y;
+        y = t;
+    }
+    return (int) x;
+}
+}
+"
+11	"class Algo {
+public static int gcd(int a, int b) {
+    int x = a;
+    int y = b;
+    while (y != 0) {
+        int t = x % y;
+        x = y;
+        y = t;
+    }
+    return x < 0 ? -x : x;
+}
+}
+"
+12	"class Algo {
+public static int gcd(int a, int b) {
+    long x = a;
+    long y = b;
+    if (x < 0) x = -x;
+    if (y < 0) y = -y;
+    if (x == 0) return (int) y;
+    if (y == 0) return (int) x;
+    int shift = 0;
+    while (((x | y) & 1L) == 0) {
+        x >>= 1;
+        y >>= 1;
+        shift++;
+    }
+    while ((x & 1L) == 0) x >>= 1;
+    do {
+        while ((y & 1L) == 0) y >>= 1;
+        if (x > y) {
+            long t = x; x = y; y = t;
+        }
+        y -= x;
+    } while (y != 0);
+    return (int) (x << shift);
+}
+}
+"
+13	"class Algo {
+public static int gcd(int a, int b) {
+    long x = a;
+    if (x < 0) x = -x;
+    long y = b;
+    if (y < 0) y = -y;
+    if (x == 0) return (int) y;
+    if (y == 0) return (int) x;
+    int shift = Math.min(Long.numberOfTrailingZeros(x), Long.numberOfTrailingZeros(y));
+    x >>= Long.numberOfTrailingZeros(x);
+    do {
+        y >>= Long.numberOfTrailingZeros(y);
+        if (x > y) {
+            long t = x; x = y; y = t;
+        }
+        y -= x;
+    } while (y != 0);
+    long g = x << shift;
+    return (int) g;
+}
+}
+"
+14	"class Algo {
+public static int gcd(int a, int b) {
+    long x = a;
+    long y = b;
+    if (x < 0) x = -x;
+    if (y < 0) y = -y;
+    if (x == 0) return (int) y;
+    if (y == 0) return (int) x;
+    int shift = Long.numberOfTrailingZeros(x | y);
+    x >>= Long.numberOfTrailingZeros(x);
+    do {
+        y >>= Long.numberOfTrailingZeros(y);
+        if (x > y) { long t = x; x = y; y = t; }
+        y = y - x;
+    } while (y != 0);
+    return (int) (x << shift);
+}
+}
+"
+15	"class Algo {
+public static int gcd(int a, int b) {
+    long x = a;
+    long y = b;
+    if (x < 0) x = -x;
+    if (y < 0) y = -y;
+    if (x == 0) return (int) y;
+    if (y == 0) return (int) x;
+    while (x != y) {
+        if (x > y) x -= y;
+        else y -= x;
+    }
+    return (int) x;
+}
+}
+"
+16	"class Algo {
+public static int gcd(int a, int b) {
+    long x = a;
+    long y = b;
+    if (x == 0 && y == 0) return 0;
+    if (x < 0) x = -x;
+    if (y < 0) y = -y;
+    if (x == 0) return (int) y;
+    if (y == 0) return (int) x;
+    while (x != 0 && y != 0) {
+        if (x >= y) {
+            long t = y;
+            while (t <= x - t) t <<= 1;
+            x -= t;
+        } else {
+            long t = x;
+            while (t <= y - t) t <<= 1;
+            y -= t;
+        }
+    }
+    long g = (x == 0) ? y : x;
+    return (int) g;
+}
+}
+"
+17	"class Algo {
+public static int gcd(int a, int b) {
+    long x = a;
+    long y = b;
+    if (x < 0) x = -x;
+    if (y < 0) y = -y;
+    if ((x | y) == 0) return 0;
+    if (x == 0) return (int) y;
+    if (y == 0) return (int) x;
+    int shift = Long.numberOfTrailingZeros(x | y);
+    x >>= Long.numberOfTrailingZeros(x);
+    while (y != 0) {
+        y >>= Long.numberOfTrailingZeros(y);
+        if (x > y) {
+            long t = x;
+            x = y;
+            y = t;
+        }
+        y -= x;
+    }
+    return (int) (x << shift);
+}
+}
+"
+18	"class Algo {
+public static int gcd(int a, int b) {
+    while (b != 0) {
+        int r = a % b;
+        a = b;
+        b = r;
+    }
+    return a < 0 ? -a : a;
+}
+}
+"
+19	"class Algo {
+public static int gcd(int a, int b) {
+    long x = a;
+    long y = b;
+    if (x < 0) x = -x;
+    if (y < 0) y = -y;
+    if (x == 0) return (int) y;
+    if (y == 0) return (int) x;
+    int shift = Math.min(Long.numberOfTrailingZeros(x), Long.numberOfTrailingZeros(y));
+    x >>= Long.numberOfTrailingZeros(x);
+    do {
+        y >>= Long.numberOfTrailingZeros(y);
+        if (x > y) {
+            long t = x; x = y; y = t;
+        }
+        y -= x;
+    } while (y != 0);
+    x <<= shift;
+    return (int) x;
+}
+}
+"
+20	"class Algo {
+public static int gcd(int a, int b) {
+    if (a == 0) return Math.abs(b);
+    if (b == 0) return Math.abs(a);
+    long x = a < 0 ? -(long) a : (long) a;
+    long y = b < 0 ? -(long) b : (long) b;
+    int shift = Long.numberOfTrailingZeros(x | y);
+    x >>= Long.numberOfTrailingZeros(x);
+    y >>= Long.numberOfTrailingZeros(y);
+    while (x != y) {
+        if (x > y) {
+            x -= y;
+            x >>= Long.numberOfTrailingZeros(x);
+        } else {
+            y -= x;
+            y >>= Long.numberOfTrailingZeros(y);
+        }
+    }
+    return (int) (x << shift);
+}
+}
+"
+21	"class Algo {
+public static int gcd(int a, int b) {
+    if (a == 0) {
+        if (b == Integer.MIN_VALUE) return Integer.MIN_VALUE;
+        return b >= 0 ? b : -b;
+    }
+    if (b == 0) {
+        if (a == Integer.MIN_VALUE) return Integer.MIN_VALUE;
+        return a >= 0 ? a : -a;
+    }
+    long u = a;
+    if (u < 0) u = -u;
+    long v = b;
+    if (v < 0) v = -v;
+    int shift = Long.numberOfTrailingZeros(u | v);
+    u >>= Long.numberOfTrailingZeros(u);
+    v >>= Long.numberOfTrailingZeros(v);
+    do {
+        if (u > v) {
+            long t = u;
+            u = v;
+            v = t;
+        }
+        v -= u;
+        v >>= Long.numberOfTrailingZeros(v);
+    } while (v != 0);
+    long g = u << shift;
+    return g == 2147483648L ? Integer.MIN_VALUE : (int) g;
+}
+}
+"
+22	"public class Algo {
+    public static int gcd(int a, int b) {
+        long x = a < 0 ? -(long) a : (long) a;
+        long y = b < 0 ? -(long) b : (long) b;
+        if (x == 0) return (int) y;
+        if (y == 0) return (int) x;
+        int shift = Long.numberOfTrailingZeros(x | y);
+        x >>>= Long.numberOfTrailingZeros(x);
+        do {
+            y >>>= Long.numberOfTrailingZeros(y);
+            if (x > y) { long t = x; x = y; y = t; }
+            y -= x;
+        } while (y != 0);
+        return (int) (x << shift);
+    }
+}
+"
+23	"class Algo {
+public static int is_non_decreasing(int[] a, int n) {
+    for (int i = 1; i < n; i++) {
+        if (a[i] < a[i - 1]) {
+            return 0;
+        }
+    }
+    return 1;
+}
+}
+"
+24	"class Algo {
+    public static int is_non_decreasing(int[] a, int n) {
+        if (n <= 1) return 1;
+        if (a[n - 1] < a[n - 2]) return 0;
+        return is_non_decreasing(a, n - 1);
+    }
+}
+"
+25	"class Algo {
+public static int is_non_decreasing(int[] a, int n) {
+    if (n <= 1) return 1;
+    int min = a[n - 1];
+    for (int i = n - 2; i >= 0; i--) {
+        if (a[i] > min) return 0;
+        if (a[i] < min) min = a[i];
+    }
+    return 1;
+}
+}
+"
+26	"class Algo {
+public static int is_non_decreasing(int[] a, int n) {
+    if (a == null) return n <= 1 ? 1 : 0;
+    if (n <= 1) return 1;
+    int minRight = a[n - 1];
+    for (int i = n - 2; i >= 0; i--) {
+        if (a[i] > minRight) return 0;
+        if (a[i] < minRight) minRight = a[i];
+    }
+    return 1;
+}
+}
+"
+27	"class Algo {
+public static int is_non_decreasing(final int[] a, long n) {
+    if (n <= 1) return 1;
+    if (a == null) return 0;
+    int m = n < 0 ? 0 : (n > a.length ? a.length : (int) n);
+    if (m <= 1) return 1;
+    int[] b = new int[m];
+    System.arraycopy(a, 0, b, 0, m);
+    java.util.Arrays.sort(b);
+    for (int i = 0; i < m; i++) {
+        if (a[i] != b[i]) return 0;
+    }
+    return 1;
+}
+}
+"
+28	"class Algo {
+public static int is_non_decreasing(int[] a, int n) {
+    if (n <= 1) return 1;
+    if (a == null) return 0;
+    if (n > a.length) n = a.length;
+    if (n <= 1) return 1;
+    return (a[n - 2] <= a[n - 1]) ? is_non_decreasing(a, n - 1) : 0;
+}
+}
+"
+29	"class Algo {
+public static int is_non_decreasing(int[] a, int n) {
+    if (n <= 1) return 1;
+    if (a == null) return 0;
+    if (a[n - 2] > a[n - 1]) return 0;
+    return is_non_decreasing(a, n - 1);
+}
+}
+"
+30	"public class Algo {
+    public static int is_non_decreasing(int[] a, int n) {
+        if (n <= 1) return 1;
+        for (int i = 1; i < n; i++) {
+            if (a[i] < a[i - 1]) return 0;
+        }
+        return 1;
+    }
+}
+"
+31	"public class Algo {
+    public static int is_non_decreasing(int[] a, int n) {
+        for (int i = 1; i < n; i++) {
+            if (a[i] < a[i - 1]) {
+                return 0;
+            }
+        }
+        return 1;
+    }
+}
+"
+32	"class Algo {
+public static int is_non_decreasing(final int[] a, int n) {
+    if (n <= 1) return 1;
+    int[] b = java.util.Arrays.copyOf(a, n);
+    java.util.Arrays.sort(b);
+    for (int i = 0; i < n; i++) {
+        if (a[i] != b[i]) return 0;
+    }
+    return 1;
+}
+}
+"
+33	"class Algo {
+public static int is_non_decreasing(int[] a, int n) {
+    if (n <= 1) return 1;
+    if (a[n - 2] > a[n - 1]) return 0;
+    return is_non_decreasing(a, n - 1);
+}
+}
+"
+34	"class Algo {
+public static int is_non_decreasing(int[] a, long n) {
+    if (n <= 1) return 1;
+    if (a == null) return 0;
+    if (n > a.length) return 0;
+    int idx = (int) n - 1;
+    if (a[idx - 1] > a[idx]) return 0;
+    return is_non_decreasing(a, n - 1);
+}
+}
+"
+35	"class Algo {
+public static int is_non_decreasing(int[] a, int n) {
+    if (n <= 1) return 1;
+    if (a == null || n > a.length) return 0;
+    for (int i = 1; i < n; i++) {
+        if (a[i] < a[i - 1]) return 0;
+    }
+    return 1;
+}
+}
+"
+36	"class Algo {
+public static int is_non_decreasing(int[] a, int n) {
+    if (n <= 1) return 1;
+    int[] orig = java.util.Arrays.copyOf(a, n);
+    int[] sorted = java.util.Arrays.copyOf(orig, n);
+    java.util.Arrays.sort(sorted, 0, n);
+    return java.util.Arrays.equals(orig, sorted) ? 1 : 0;
+}
+}
+"
+37	"class Algo {
+public static int is_non_decreasing(int[] a, long n) {
+    if (a == null) return n == 0 ? 1 : 0;
+    if (n <= 1) return 1;
+    int m = (int) Math.min((long) a.length, n);
+    if (m <= 1) return 1;
+    int[] b = java.util.Arrays.copyOf(a, m);
+    java.util.Arrays.sort(b);
+    for (int i = 0; i < m; i++) if (a[i] != b[i]) return 0;
+    return 1;
+}
+}
+"
+38	"class Algo {
+public static int is_prime(int n) {
+    if (n < 2) return 0;
+    if (n == 2 || n == 3) return 1;
+    if ((n & 1) == 0) return 0;
+    if (n % 3 == 0) return 0;
+    long d = n - 1;
+    int s = 0;
+    while ((d & 1) == 0) {
+        d >>= 1;
+        s++;
+    }
+    int[] bases = {2, 7, 61};
+    for (int a : bases) {
+        if (a % n == 0) continue;
+        long x = 1;
+        long base = a % n;
+        long dd = d;
+        while (dd > 0) {
+            if ((dd & 1L) != 0) x = (x * base) % n;
+            base = (base * base) % n;
+            dd >>= 1;
+        }
+        if (x == 1 || x == n - 1) continue;
+        boolean witness = true;
+        for (int r = 1; r < s; r++) {
+            x = (x * x) % n;
+            if (x == n - 1) {
+                witness = false;
+                break;
+            }
+        }
+        if (witness) return 0;
+    }
+    return 1;
+}
+}
+"
+39	"class Algo {
+public static int is_prime(int n) {
+    if (n < 2) return 0;
+    if ((n & 1) == 0) return n == 2 ? 1 : 0;
+    int[] small = {3,5,7,11,13,17,19,23,29,31,37};
+    for (int p : small) {
+        if (n == p) return 1;
+        if (n % p == 0) return 0;
+    }
+    long d = n - 1;
+    int s = 0;
+    while ((d & 1) == 0) { d >>= 1; s++; }
+    int[] bases = {2,3,5,7,11};
+    long nn = n;
+    for (int a : bases) {
+        if (a % n == 0) continue;
+        long x = 1, b = a % nn, e = d;
+        while (e > 0) {
+            if ((e & 1L) != 0) x = (x * b) % nn;
+            b = (b * b) % nn;
+            e >>= 1;
+        }
+        if (x == 1 || x == nn - 1) continue;
+        boolean witness = true;
+        for (int r = 1; r < s; r++) {
+            x = (x * x) % nn;
+            if (x == nn - 1) { witness = false; break; }
+        }
+        if (witness) return 0;
+    }
+    return 1;
+}
+}
+"
+40	"class Algo {
+public static int is_prime(int n) {
+    if (n <= 1) return 0;
+    if (n == 2) return 1;
+    if ((n & 1) == 0) return 0;
+    for (int i = 3; i <= n / i; i += 2) {
+        if (n % i == 0) return 0;
+    }
+    return 1;
+}
+}
+"
+41	"class Algo {
+public static int is_prime(int n) {
+    if (n < 2) return 0;
+    if ((n & 1) == 0) return n == 2 ? 1 : 0;
+    long mod = n;
+    long dd = (long) n - 1;
+    int s = Long.numberOfTrailingZeros(dd);
+    long d = dd >> s;
+    int[] bases = {2, 7, 61};
+    for (int a : bases) {
+        if (a % n == 0) continue;
+        long x = 1;
+        long p = a % n;
+        long e = d;
+        while (e > 0) {
+            if ((e & 1L) != 0) x = (x * p) % mod;
+            p = (p * p) % mod;
+            e >>= 1;
+        }
+        if (x == 1 || x == mod - 1) continue;
+        boolean ok = false;
+        for (int r = 1; r < s; r++) {
+            x = (x * x) % mod;
+            if (x == mod - 1) { ok = true; break; }
+        }
+        if (!ok) return 0;
+    }
+    return 1;
+}
+}
+"
+42	"public class Algo {
+    public static int is_prime(int n) {
+        if (n <= 1) return 0;
+        if (n == 2) return 1;
+        if ((n & 1) == 0) return 0;
+        for (int i = 3; i <= n / i; i += 2) {
+            if (n % i == 0) return 0;
+        }
+        return 1;
+    }
+}
+"
+43	"class Algo {
+public static int is_prime(int n) {
+    if (n <= 1) return 0;
+    if (n <= 3) return 1;
+    if (n % 2 == 0 || n % 3 == 0) return 0;
+    int i = 5;
+    while (i <= n / i) {
+        if (n % i == 0 || n % (i + 2) == 0) return 0;
+        i += 6;
+    }
+    return 1;
+}
+}
+"
+44	"class Algo {
+public static int is_prime(int n) {
+    if (n <= 1) return 0;
+    if (n <= 3) return 1;
+    if ((n & 1) == 0 || n % 3 == 0) return 0;
+    long i = 5;
+    while (i * i <= n) {
+        if (n % i == 0 || n % (i + 2) == 0) return 0;
+        i += 6;
+    }
+    return 1;
+}
+}
+"
+45	"class Algo {
+public static int is_prime(int n) {
+    if (n <= 1) return 0;
+    if (n <= 3) return 1;
+    if (n % 2 == 0 || n % 3 == 0) return 0;
+    long i = 5;
+    while (i * i <= n) {
+        if (n % i == 0 || n % (i + 2) == 0) return 0;
+        i += 6;
+    }
+    return 1;
+}
+}
+"
+46	"class Algo {
+    public static int is_prime(int n) {
+        if (n <= 1) return 0;
+        if (n <= 3) return 1;
+        if (n % 2 == 0 || n % 3 == 0) return 0;
+        long nn = n;
+        for (long i = 5; i * i <= nn; i += 6) {
+            if (n % i == 0 || n % (i + 2) == 0) return 0;
+        }
+        return 1;
+    }
+}
+"
+47	"class Algo {
+public static int is_prime(int n) {
+    if (n < 2) return 0;
+    if ((n & 1) == 0) return n == 2 ? 1 : 0;
+    if (n % 3 == 0) return n == 3 ? 1 : 0;
+    if (n % 5 == 0) return n == 5 ? 1 : 0;
+    if (n % 7 == 0) return n == 7 ? 1 : 0;
+    if (n % 11 == 0) return n == 11 ? 1 : 0;
+    long d = n - 1L;
+    int s = 0;
+    while ((d & 1L) == 0) { d >>= 1; s++; }
+    int[] bases = {2, 7, 61};
+    outer:
+    for (int a : bases) {
+        if (a >= n) continue;
+        long mod = n;
+        long e = d;
+        long base = a % mod;
+        long x = 1L;
+        while (e > 0) {
+            if ((e & 1L) != 0) x = (x * base) % mod;
+            base = (base * base) % mod;
+            e >>= 1;
+        }
+        if (x == 1 || x == mod - 1) continue;
+        for (int r = 1; r < s; r++) {
+            x = (x * x) % mod;
+            if (x == mod - 1) continue outer;
+            if (x == 1) return 0;
+        }
+        return 0;
+    }
+    return 1;
+}
+}
+"
+48	"class Algo {
+public static int is_prime(int n) {
+    if (n <= 1) return 0;
+    int[] small = {2, 3, 5, 7, 11};
+    for (int p : small) {
+        if (n == p) return 1;
+        if (n % p == 0) return 0;
+    }
+    long d = n - 1L;
+    int s = 0;
+    while ((d & 1L) == 0L) {
+        d >>= 1;
+        s++;
+    }
+    int[] bases = {2, 3, 5, 7, 11};
+    outer:
+    for (int aBase : bases) {
+        long a = aBase % n;
+        long x = 1L, p = a, e = d;
+        while (e > 0) {
+            if ((e & 1L) != 0L) x = (x * p) % n;
+            p = (p * p) % n;
+            e >>= 1;
+        }
+        if (x == 1L || x == n - 1L) continue;
+        for (int r = 1; r < s; r++) {
+            x = (x * x) % n;
+            if (x == n - 1L) continue outer;
+        }
+        return 0;
+    }
+    return 1;
+}
+}
+"
+49	"public class Algo {
+    public static int lcm(int a, int b) {
+        long aa = Math.abs((long) a);
+        long bb = Math.abs((long) b);
+        if (aa == 0 || bb == 0) return 0;
+        long x = aa, y = bb;
+        while (y != 0) {
+            long t = x % y;
+            x = y;
+            y = t;
+        }
+        long res = (aa / x) * bb;
+        return (int) res;
+    }
+}
+"
+50	"public class Algo {
+    public static int lcm(int a, int b) {
+        if (a == 0 || b == 0) return 0;
+        long x = Math.abs((long)a);
+        long y = Math.abs((long)b);
+        long u = x, v = y;
+        int shift = Long.numberOfTrailingZeros(u | v);
+        u >>= Long.numberOfTrailingZeros(u);
+        do {
+            v >>= Long.numberOfTrailingZeros(v);
+            if (u > v) { long t = u; u = v; v = t; }
+            v -= u;
+        } while (v != 0);
+        long g = u << shift;
+        long res = (x / g) * y;
+        return (int) res;
+    }
+}
+"
+51	"class Algo {
+public static int lcm(int a, int b) {
+    long x = Math.abs((long) a);
+    long y = Math.abs((long) b);
+    if (x == 0 || y == 0) return 0;
+    long res = 1;
+    for (long i = 2; i * i <= x || i * i <= y; i++) {
+        int ea = 0;
+        while (x % i == 0) { x /= i; ea++; }
+        int eb = 0;
+        while (y % i == 0) { y /= i; eb++; }
+        int e = ea > eb ? ea : eb;
+        while (e-- > 0) res *= i;
+    }
+    if (x > 1 && y > 1) {
+        if (x == y) res *= x;
+        else res *= x * y;
+    } else if (x > 1) {
+        res *= x;
+    } else if (y > 1) {
+        res *= y;
+    }
+    return (int) res;
+}
+}
+"
+52	"class Algo {
+public static int lcm(int a, int b) {
+    if (a == 0 || b == 0) return 0;
+    long aa = Math.abs((long) a);
+    long bb = Math.abs((long) b);
+    long x = aa, y = bb;
+    while (y != 0) {
+        long t = x % y;
+        x = y;
+        y = t;
+    }
+    long g = x;
+    long res = (aa / g) * bb;
+    return (int) res;
+}
+}
+"
+53	"class Algo {
+public static int lcm(int a, int b) {
+    long x = Math.abs((long) a), y = Math.abs((long) b);
+    if (x == 0 || y == 0) return 0;
+    long res = 1;
+    for (long p = 2; (p * p <= x) || (p * p <= y); p++) {
+        int e1 = 0, e2 = 0;
+        while (x % p == 0) { x /= p; e1++; }
+        while (y % p == 0) { y /= p; e2++; }
+        int m = e1 > e2 ? e1 : e2;
+        while (m-- > 0) res *= p;
+    }
+    if (x > 1 && y > 1) {
+        if (x == y) res *= x;
+        else res *= x * y;
+    } else if (x > 1) res *= x;
+    else if (y > 1) res *= y;
+    return (int) res;
+}
+}
+"
+54	"class Algo {
+public static int lcm(int a, int b) {
+    if (a == 0 || b == 0) return 0;
+    long x = Math.abs((long) a);
+    long y = Math.abs((long) b);
+    long u = x, v = y;
+    while (v != 0) {
+        long t = u % v;
+        u = v;
+        v = t;
+    }
+    long g = u;
+    long l = (x / g) * y;
+    return (int) l;
+}
+}
+"
+55	"class Algo {
+public static int lcm(int a, int b) {
+    if (a == 0 || b == 0) return 0;
+    long aa = a;
+    long bb = b;
+    long aAbs = aa >= 0 ? aa : -aa;
+    long bAbs = bb >= 0 ? bb : -bb;
+    long x = aAbs, y = bAbs;
+    while (y != 0) {
+        long t = x % y;
+        x = y;
+        y = t;
+    }
+    long gcd = x;
+    long res = (aAbs / gcd) * bAbs;
+    return (int) res;
+}
+}
+"
+56	"public class Algo {
+    public static int lcm(int a, int b) {
+        if (a == 0 || b == 0) return 0;
+        long la = Math.abs((long) a);
+        long lb = Math.abs((long) b);
+        long x = la, y = lb;
+        while (y != 0) {
+            long t = x % y;
+            x = y;
+            y = t;
+        }
+        long result = (la / x) * lb;
+        return (int) result;
+    }
+}
+"
+57	"class Algo {
+public static int lcm(int a, int b) {
+    if (a == 0 || b == 0) return 0;
+    long x = a, y = b;
+    if (x < 0) x = -x;
+    if (y < 0) y = -y;
+    long u = x, v = y;
+    while (v != 0) {
+        long t = u % v;
+        u = v;
+        v = t;
+    }
+    long l = (x / u) * y;
+    return (int) l;
+}
+}
+"
+58	"class Algo {
+public static int lcm(int a, int b) {
+    if (a == 0 || b == 0) return 0;
+    long x = Math.abs((long) a);
+    long y = Math.abs((long) b);
+
+    long u = x, v = y;
+    int tzU = Long.numberOfTrailingZeros(u);
+    int tzV = Long.numberOfTrailingZeros(v);
+    int shift = Math.min(tzU, tzV);
+
+    u >>= tzU;
+    v >>= tzV;
+
+    while (u != v) {
+        if (u > v) {
+            long t = u;
+            u = v;
+            v = t;
+        }
+        v -= u;
+        v >>= Long.numberOfTrailingZeros(v);
+    }
+
+    long g = u << shift;
+    long res = (x / g) * y;
+    return (int) res;
+}
+}
+"
+59	"public class Algo {
+    public static int lcm(int a, int b) {
+        if (a == 0 || b == 0) return 0;
+        long x = Math.abs((long) a);
+        long y = Math.abs((long) b);
+        long r = 1;
+        long d = 2;
+        while (x > 1 || y > 1) {
+            boolean divided = false;
+            if (x % d == 0) { x /= d; divided = true; }
+            if (y % d == 0) { y /= d; divided = true; }
+            if (divided) {
+                r *= d;
+            } else {
+                d += (d == 2 ? 1 : 2);
+            }
+        }
+        return (int) r;
+    }
+}
+"
+60	"class Algo {
+public static int lower_bound(int[] a, int n, int x) {
+    int pos = -1;
+    int step = 1;
+    while (step < n) step <<= 1;
+    for (; step > 0; step >>= 1) {
+        int next = pos + step;
+        if (next < n && a[next] < x) pos = next;
+    }
+    return pos + 1;
+}
+}
+"
+61	"class Algo {
+public static int lower_bound(int[] a, int n, int x) {
+    int k = 1;
+    while (k < n) k <<= 1;
+    int pos = -1;
+    for (; k != 0; k >>= 1) {
+        int next = pos + k;
+        if (next < n && a[next] < x) pos = next;
+    }
+    return pos + 1;
+}
+}
+"
+62	"class Algo {
+public static int lower_bound(int[] a, int n, int x) {
+    int lo = 0, hi = n;
+    while (lo < hi) {
+        int mid = lo + ((hi - lo) >>> 1);
+        if (a[mid] < x) {
+            lo = mid + 1;
+        } else {
+            hi = mid;
+        }
+    }
+    return lo;
+}
+}
+"
+63	"class Algo {
+public static int lower_bound(int[] a, int n, int x) {
+    if (n <= 0) return 0;
+    int k = 1 << (31 - Integer.numberOfLeadingZeros(n));
+    int idx = -1;
+    while (k > 0) {
+        long next = (long) idx + k;
+        if (next < n && a[(int) next] < x) {
+            idx = (int) next;
+        }
+        k >>= 1;
+    }
+    return idx + 1;
+}
+}
+"
+64	"class Algo {
+public static int lower_bound(int[] a, int n, int x) {
+    int pos = -1;
+    for (int step = Integer.highestOneBit(n); step != 0; step >>= 1) {
+        int next = pos + step;
+        if (next < n && a[next] < x) {
+            pos = next;
+        }
+    }
+    return pos + 1;
+}
+}
+"
+65	"class Algo {
+public static int lower_bound(int[] a, int n, int x) {
+    int l = 0, r = n;
+    while (l < r) {
+        int m = l + ((r - l) >>> 1);
+        if (a[m] < x) {
+            l = m + 1;
+        } else {
+            r = m;
+        }
+    }
+    return l;
+}
+}
+"
+66	"class Algo {
+public static int lower_bound(int[] a, int n, int x) {
+    int step = 1;
+    while (step < n) step <<= 1;
+    int idx = -1;
+    while (step > 0) {
+        int next = idx + step;
+        if (next < n && a[next] < x) idx = next;
+        step >>= 1;
+    }
+    return idx + 1;
+}
+}
+"
+67	"public class Algo {
+    public static int lower_bound(final int[] a, int n, int x) {
+        int i = -1;
+        int step = 1;
+        while (step < n) step <<= 1;
+        while (step > 0) {
+            int ni = i + step;
+            if (ni < n && a[ni] < x) i = ni;
+            step >>= 1;
+        }
+        return i + 1;
+    }
+}
+"
+68	"class Algo {
+public static int lower_bound(int[] a, int n, int x) {
+    if (n <= 0) return 0;
+    if (a[0] >= x) return 0;
+    int lo = 0, hi = 1;
+    while (hi < n && a[hi] < x) {
+        lo = hi;
+        hi <<= 1;
+    }
+    if (hi > n) hi = n;
+    int l = lo + 1, r = hi;
+    while (l < r) {
+        int m = l + ((r - l) >>> 1);
+        if (a[m] < x) l = m + 1;
+        else r = m;
+    }
+    return l;
+}
+}
+"
+69	"public class Algo {
+    public static int lower_bound(int[] a, int n, int x) {
+        int idx = -1;
+        int step = 1;
+        while (step < n) step <<= 1;
+        while (step > 0) {
+            int next = idx + step;
+            if (next < n && a[next] < x) {
+                idx = next;
+            }
+            step >>= 1;
+        }
+        return idx + 1;
+    }
+}
+"
+70	"public class Algo {
+    public static int lower_bound(int[] a, int n, int x) {
+        if (n <= 0) return 0;
+        int step = 1 << (31 - Integer.numberOfLeadingZeros(n));
+        int pos = -1;
+        while (step > 0) {
+            int next = pos + step;
+            if (next < n && a[next] < x) {
+                pos = next;
+            }
+            step >>= 1;
+        }
+        return pos + 1;
+    }
+}
+"
+71	"public class Algo {
+    public static int lower_bound(int[] a, int n, int x) {
+        int idx = -1;
+        int p = 1;
+        while (p < n) p <<= 1;
+        if (p > n) p >>= 1;
+        while (p > 0) {
+            int next = idx + p;
+            if (next < n && a[next] < x) {
+                idx = next;
+            }
+            p >>= 1;
+        }
+        return idx + 1;
+    }
+}
+"
+72	"class Algo {
+public static long max_subarray_sum(int[] a, int n) {
+    if (a == null || n <= 0) return 0L;
+    int len = Math.min(n, a.length);
+    if (len == 0) return 0L;
+    long current = a[0];
+    long best = current;
+    for (int i = 1; i < len; i++) {
+        long val = a[i];
+        current = current < 0 ? val : current + val;
+        if (current > best) best = current;
+    }
+    return best;
+}
+}
+"
+73	"class Algo {
+public static long max_subarray_sum(final int[] a, long n) {
+    if (a == null || n <= 0) return 0L;
+    int len = (int) Math.min(n, (long) a.length);
+    if (len == 0) return 0L;
+    long maxSoFar = Long.MIN_VALUE;
+    long curr = 0L;
+    for (int i = 0; i < len; i++) {
+        long ai = a[i];
+        if (curr > 0) {
+            curr += ai;
+        } else {
+            curr = ai;
+        }
+        if (curr > maxSoFar) {
+            maxSoFar = curr;
+        }
+    }
+    return maxSoFar;
+}
+}
+"
+74	"class Algo {
+public static long max_subarray_sum(int[] a, int n) {
+    if (a == null || n <= 0) return 0L;
+    if (n > a.length) n = a.length;
+    int m = 1;
+    while (m < n) m <<= 1;
+    int size = m << 1;
+    long[] sum = new long[size];
+    long[] pref = new long[size];
+    long[] suff = new long[size];
+    long[] best = new long[size];
+    final long NEG_INF = Long.MIN_VALUE / 4;
+    for (int i = 0; i < m; i++) {
+        int idx = m + i;
+        if (i < n) {
+            long v = a[i];
+            sum[idx] = v;
+            pref[idx] = v;
+            suff[idx] = v;
+            best[idx] = v;
+        } else {
+            sum[idx] = 0L;
+            pref[idx] = NEG_INF;
+            suff[idx] = NEG_INF;
+            best[idx] = NEG_INF;
+        }
+    }
+    for (int i = m - 1; i > 0; --i) {
+        int l = i << 1, r = l + 1;
+        long candPref = pref[r] == NEG_INF ? NEG_INF : sum[l] + pref[r];
+        long candSuff = suff[l] == NEG_INF ? NEG_INF : sum[r] + suff[l];
+        long cross = (suff[l] == NEG_INF || pref[r] == NEG_INF) ? NEG_INF : suff[l] + pref[r];
+        sum[i] = sum[l] + sum[r];
+        pref[i] = Math.max(pref[l], candPref);
+        suff[i] = Math.max(suff[r], candSuff);
+        best[i] = Math.max(Math.max(best[l], best[r]), cross);
+    }
+    return best[1];
+}
+}
+"
+75	"public class Algo {
+    public static long max_subarray_sum(int[] a, int n) {
+        if (a == null || n <= 0) return 0L;
+        n = Math.min(n, a.length);
+        return maxSub(a, 0, n);
+    }
+    private static long maxSub(int[] a, int l, int r) {
+        if (l + 1 == r) return a[l];
+        int m = (l + r) >>> 1;
+        long left = maxSub(a, l, m);
+        long right = maxSub(a, m, r);
+        long bestLeft = Long.MIN_VALUE, sum = 0;
+        for (int i = m - 1; i >= l; i--) {
+            sum += a[i];
+            if (sum > bestLeft) bestLeft = sum;
+        }
+        long bestRight = Long.MIN_VALUE;
+        sum = 0;
+        for (int i = m; i < r; i++) {
+            sum += a[i];
+            if (sum > bestRight) bestRight = sum;
+        }
+        long cross = bestLeft + bestRight;
+        return Math.max(Math.max(left, right), cross);
+    }
+}
+"
+76	"class Algo {
+public static long max_subarray_sum(int[] a, int n) {
+    int end = a == null ? 0 : Math.min(n, a.length);
+    if (end <= 0) return 0L;
+    final java.util.function.Function<int[], long[]>[] self = new java.util.function.Function[]{null};
+    self[0] = range -> {
+        int l = range[0], r = range[1];
+        if (l + 1 == r) {
+            long v = a[l];
+            return new long[]{v, v, v, v};
+        }
+        int m = l + ((r - l) >>> 1);
+        long[] left = self[0].apply(new int[]{l, m});
+        long[] right = self[0].apply(new int[]{m, r});
+        long sum = left[0] + right[0];
+        long maxPref = Math.max(left[1], left[0] + right[1]);
+        long maxSuff = Math.max(right[2], right[0] + left[2]);
+        long maxSub = Math.max(Math.max(left[3], right[3]), left[2] + right[1]);
+        return new long[]{sum, maxPref, maxSuff, maxSub};
+    };
+    return self[0].apply(new int[]{0, end})[3];
+}
+}
+"
+77	"class Algo {
+public static long max_subarray_sum(final int[] a, int n) {
+    int len = (a == null || n <= 0) ? 0 : Math.min(n, a.length);
+    if (len == 0) return 0L;
+    long sum = 0L;
+    long minPrefix = 0L;
+    long best = Long.MIN_VALUE;
+    for (int i = 0; i < len; i++) {
+        sum += a[i];
+        long candidate = sum - minPrefix;
+        if (candidate > best) best = candidate;
+        if (sum < minPrefix) minPrefix = sum;
+    }
+    return best;
+}
+}
+"
+78	"class Algo {
+public static long max_subarray_sum(int[] a, int n) {
+    if (a == null || n <= 0) return 0L;
+    int limit = Math.min(n, a.length);
+    long prefix = 0L;
+    long minPrefix = 0L;
+    long best = Long.MIN_VALUE;
+    for (int i = 0; i < limit; i++) {
+        prefix += (long) a[i];
+        long cand = prefix - minPrefix;
+        if (cand > best) best = cand;
+        if (prefix < minPrefix) minPrefix = prefix;
+    }
+    return best == Long.MIN_VALUE ? 0L : best;
+}
+}
+"
+79	"class Algo {
+public static long max_subarray_sum(int[] a, int n) {
+    if (n <= 0) return 0L;
+    if (n == 1) return (long) a[0];
+    long prevBest = max_subarray_sum(a, n - 1);
+    long sum = 0L;
+    long bestSuffix = Long.MIN_VALUE;
+    for (int i = n - 1; i >= 0; i--) {
+        sum += (long) a[i];
+        if (sum > bestSuffix) bestSuffix = sum;
+    }
+    return Math.max(prevBest, bestSuffix);
+}
+}
+"
+80	"public class Algo {
+    public static long max_subarray_sum(final int[] a, long n) {
+        int m = (int) Math.min(Math.max(n, 0L), (long) (a == null ? 0 : a.length));
+        if (m <= 0) return 0L;
+        if (m == 1) return a[0];
+        int mid = m >>> 1;
+        long leftBest = max_subarray_sum(java.util.Arrays.copyOfRange(a, 0, mid), mid);
+        long rightBest = max_subarray_sum(java.util.Arrays.copyOfRange(a, mid, m), (long) m - mid);
+        long bestCrossLeft = Long.MIN_VALUE;
+        long acc = 0;
+        for (int i = mid - 1; i >= 0; --i) {
+            acc += a[i];
+            if (acc > bestCrossLeft) bestCrossLeft = acc;
+        }
+        long bestCrossRight = Long.MIN_VALUE;
+        acc = 0;
+        for (int i = mid; i < m; ++i) {
+            acc += a[i];
+            if (acc > bestCrossRight) bestCrossRight = acc;
+        }
+        long cross = bestCrossLeft + bestCrossRight;
+        return Math.max(Math.max(leftBest, rightBest), cross);
+    }
+}
+"
+81	"class Algo {
+public static long max_subarray_sum(int[] a, int n) {
+    if (n <= 0) return 0L;
+    if (n == 1) return (long) a[0];
+    int mid = n / 2;
+    int[] left = java.util.Arrays.copyOfRange(a, 0, mid);
+    int[] right = java.util.Arrays.copyOfRange(a, mid, n);
+    long leftMax = max_subarray_sum(left, left.length);
+    long rightMax = max_subarray_sum(right, right.length);
+    long sum = 0L, leftSuffixMax = Long.MIN_VALUE;
+    for (int i = left.length - 1; i >= 0; i--) {
+        sum += left[i];
+        if (sum > leftSuffixMax) leftSuffixMax = sum;
+    }
+    sum = 0L;
+    long rightPrefixMax = Long.MIN_VALUE;
+    for (int i = 0; i < right.length; i++) {
+        sum += right[i];
+        if (sum > rightPrefixMax) rightPrefixMax = sum;
+    }
+    long crossMax = leftSuffixMax + rightPrefixMax;
+    return Math.max(Math.max(leftMax, rightMax), crossMax);
+}
+}
+"
+82	"class Algo {
+public static long max_subarray_sum(final int[] a, long n) {
+    int len = (n <= 0L) ? 0 : (n > a.length ? a.length : (int) n);
+    if (len == 0) return 0L;
+
+    int[] L = new int[64];
+    int[] R = new int[64];
+    int[] ST = new int[64];
+    int sp = 0;
+
+    long[] best = new long[64];
+    long[] pref = new long[64];
+    long[] suff = new long[64];
+    long[] sum = new long[64];
+    int rsp = 0;
+
+    L[sp] = 0; R[sp] = len; ST[sp] = 0; sp++;
+
+    while (sp > 0) {
+        int l = L[--sp], r = R[sp], st = ST[sp];
+        int width = r - l;
+        if (width <= 1) {
+            if (rsp >= best.length) {
+                int nc = best.length << 1;
+                best = java.util.Arrays.copyOf(best, nc);
+                pref = java.util.Arrays.copyOf(pref, nc);
+                suff = java.util.Arrays.copyOf(suff, nc);
+                sum = java.util.Arrays.copyOf(sum, nc);
+            }
+            long v = (long) a[l];
+            best[rsp] = v;
+            pref[rsp] = v;
+            suff[rsp] = v;
+            sum[rsp] = v;
+            rsp++;
+        } else if (st == 0) {
+            if (sp + 2 >= L.length) {
+                int nc = L.length << 1;
+                L = java.util.Arrays.copyOf(L, nc);
+                R = java.util.Arrays.copyOf(R, nc);
+                ST = java.util.Arrays.copyOf(ST, nc);
+            }
+            int m = (l + r) >>> 1;
+            L[sp] = l; R[sp] = r; ST[sp] = 1; sp++;
+            L[sp] = m; R[sp] = r; ST[sp] = 0; sp++;
+            L[sp] = l; R[sp] = m; ST[sp] = 0; sp++;
+        } else {
+            long rbest = best[--rsp], rpref = pref[rsp], rsuff = suff[rsp], rsum = sum[rsp];
+            long lbest = best[--rsp], lpref = pref[rsp], lsuff = suff[rsp], lsum = sum[rsp];
+            long s = lsum + rsum;
+            long p = Math.max(lpref, lsum + rpref);
+            long t = Math.max(rsuff, rsum + lsuff);
+            long b = Math.max(Math.max(lbest, rbest), lsuff + rpref);
+            if (rsp >= best.length) {
+                int nc = best.length << 1;
+                best = java.util.Arrays.copyOf(best, nc);
+                pref = java.util.Arrays.copyOf(pref, nc);
+                suff = java.util.Arrays.copyOf(suff, nc);
+                sum = java.util.Arrays.copyOf(sum, nc);
+            }
+            best[rsp] = b;
+            pref[rsp] = p;
+            suff[rsp] = t;
+            sum[rsp] = s;
+            rsp++;
+        }
+    }
+    return best[rsp - 1];
+}
+}
+"
+83	"class Algo {
+public static long max_subarray_sum(int[] a, int n) {
+    if (n <= 0) return 0L;
+    int m = 1;
+    while (m < n) m <<= 1;
+    int size = m << 1;
+    long[] sum = new long[size];
+    long[] pref = new long[size];
+    long[] suff = new long[size];
+    long[] best = new long[size];
+    long NEG_INF = Long.MIN_VALUE / 4;
+    for (int i = 0; i < m; i++) {
+        int idx = m + i;
+        if (i < n) {
+            long v = a[i];
+            sum[idx] = v;
+            pref[idx] = v;
+            suff[idx] = v;
+            best[idx] = v;
+        } else {
+            sum[idx] = 0L;
+            pref[idx] = NEG_INF;
+            suff[idx] = NEG_INF;
+            best[idx] = NEG_INF;
+        }
+    }
+    for (int i = m - 1; i >= 1; i--) {
+        int l = i << 1, r = l + 1;
+        sum[i] = sum[l] + sum[r];
+        long prefCand1 = pref[l];
+        long prefCand2 = (pref[r] == NEG_INF) ? NEG_INF : sum[l] + pref[r];
+        pref[i] = Math.max(prefCand1, prefCand2);
+        long suffCand1 = suff[r];
+        long suffCand2 = (suff[l] == NEG_INF) ? NEG_INF : sum[r] + suff[l];
+        suff[i] = Math.max(suffCand1, suffCand2);
+        long bestCand = best[l] >= best[r] ? best[l] : best[r];
+        long crossCand = (suff[l] == NEG_INF || pref[r] == NEG_INF) ? NEG_INF : suff[l] + pref[r];
+        best[i] = bestCand >= crossCand ? bestCand : crossCand;
+    }
+    return best[1];
+}
+}
+"
+84	"class Algo {
+public static long max_subarray_sum(int[] a, int n) {
+    if (a == null || n <= 0) return 0L;
+    int len = Math.min(n, a.length);
+    long maxSoFar = Long.MIN_VALUE;
+    long maxEndingHere = 0L;
+    for (int i = 0; i < len; i++) {
+        long v = a[i];
+        if (maxEndingHere <= 0) {
+            maxEndingHere = v;
+        } else {
+            maxEndingHere += v;
+        }
+        if (maxEndingHere > maxSoFar) {
+            maxSoFar = maxEndingHere;
+        }
+    }
+    return maxSoFar == Long.MIN_VALUE ? 0L : maxSoFar;
+}
+}
+"
+85	"class Algo {
+public static long max_subarray_sum(int[] a, int n) {
+    if (a == null || n <= 0) return 0L;
+    int len = Math.min(n, a.length);
+    if (len == 0) return 0L;
+    long maxEndingHere = a[0];
+    long maxSoFar = maxEndingHere;
+    for (int i = 1; i < len; i++) {
+        long x = a[i];
+        if (maxEndingHere < 0) maxEndingHere = x;
+        else maxEndingHere += x;
+        if (maxEndingHere > maxSoFar) maxSoFar = maxEndingHere;
+    }
+    return maxSoFar;
+}
+}
+"
+86	"class Algo {
+public static long max_subarray_sum(final int[] a, final int n) {
+    if (n <= 0) return 0L;
+    long sum = 0L;
+    long minPrefix = 0L;
+    long best = Long.MIN_VALUE;
+    for (int i = 0; i < n; i++) {
+        sum += (long) a[i];
+        long candidate = sum - minPrefix;
+        if (candidate > best) best = candidate;
+        if (sum < minPrefix) minPrefix = sum;
+    }
+    return best;
+}
+}
+"
+87	"class Algo {
+public static int popcount_u32(int x) {
+    return x == 0 ? 0 : 1 + popcount_u32(x & (x - 1));
+}
+}
+"
+88	"class Algo {
+public static int popcount_u32(int x) {
+    return Integer.bitCount(x);
+}
+}
+"
+89	"class Algo {
+public static int popcount_u32(int x) {
+    if (x == 0) return 0;
+    return 1 + popcount_u32(x & (x - 1));
+}
+}
+"
+90	"class Algo {
+public static int popcount_u32(int x) {
+    int[] t = {0,1,1,2,1,2,2,3,1,2,2,3,2,3,3,4};
+    return t[x & 15]
+         + t[(x >>> 4) & 15]
+         + t[(x >>> 8) & 15]
+         + t[(x >>> 12) & 15]
+         + t[(x >>> 16) & 15]
+         + t[(x >>> 20) & 15]
+         + t[(x >>> 24) & 15]
+         + t[(x >>> 28) & 15];
+}
+}
+"
+91	"public class Algo {
+    public static int popcount_u32(int x) {
+        if (x == 0) return 0;
+        return 1 + popcount_u32(x & (x - 1));
+    }
+}
+"
+92	"public class Algo {
+    public static int popcount_u32(int x) {
+        return Integer.bitCount(x);
+    }
+}
+"
+93	"class Algo {
+public static int popcount_u32(int x) {
+    if (x == 0) return 0;
+    return (x & 1) + popcount_u32(x >>> 1);
+}
+}
+"
+94	"public class Algo {
+    public static int popcount_u32(int x) {
+        x = x - ((x >>> 1) & 0x55555555);
+        x = (x & 0x33333333) + ((x >>> 2) & 0x33333333);
+        x = (x + (x >>> 4)) & 0x0F0F0F0F;
+        x = x + (x >>> 8);
+        x = x + (x >>> 16);
+        return x & 0x3F;
+    }
+}
+"
+95	"public class Algo {
+    public static int popcount_u32(int x) {
+        byte[] t = new byte[]{0,1,1,2,1,2,2,3,1,2,2,3,2,3,3,4};
+        int c = 0;
+        for (int i = 0; i < 8; i++) {
+            c += t[x & 0xF];
+            x >>>= 4;
+        }
+        return c;
+    }
+}
+"
+96	"class Algo {
+public static void reverse_array(int[] a, long n) {
+    if (a == null || n <= 1) return;
+    int m = n > a.length ? a.length : (n < 0 ? 0 : (int) n);
+    int i = 0, j = m - 1;
+    while (i < j) {
+        int tmp = a[i];
+        a[i] = a[j];
+        a[j] = tmp;
+        i++;
+        j--;
+    }
+}
+}
+"
+97	"class Algo {
+public static void reverse_array(int[] a, int n) {
+    if (a == null) return;
+    int i = 0, j = Math.min(n, a.length) - 1;
+    while (i < j) {
+        int tmp = a[i];
+        a[i] = a[j];
+        a[j] = tmp;
+        i++;
+        j--;
+    }
+}
+}
+"
+98	"class Algo {
+public static void reverse_array(int[] a, int n) {
+    if (a == null || n <= 1) return;
+    int m = Math.min(n, a.length);
+    int[] tmp = java.util.Arrays.copyOf(a, m);
+    for (int i = 0; i < m; i++) {
+        a[i] = tmp[m - 1 - i];
+    }
+}
+}
+"
+99	"class Algo {
+public static void reverse_array(int[] a, int n) {
+    if (a == null || n <= 1) return;
+    int m = Math.min(n, a.length);
+    int[] b = new int[m];
+    for (int i = 0; i < m; i++) {
+        b[i] = a[m - 1 - i];
+    }
+    System.arraycopy(b, 0, a, 0, m);
+}
+}
+"
+100	"class Algo {
+public static void reverse_array(int[] a, long n) {
+    if (a == null || n <= 1) return;
+    int m = (int) Math.min(Math.max(0L, n), (long) a.length);
+    if (m <= 1) return;
+    int[] b = new int[m];
+    for (int i = 0; i < m; i++) {
+        b[i] = a[m - 1 - i];
+    }
+    System.arraycopy(b, 0, a, 0, m);
+}
+}
+"
+101	"class Algo {
+public static void reverse_array(int[] a, int n) {
+    if (a == null) return;
+    if (n < 0) n = 0;
+    if (n > a.length) n = a.length;
+    int i = 0, j = n - 1;
+    while (i < j) {
+        int t = a[i];
+        a[i] = a[j];
+        a[j] = t;
+        i++;
+        j--;
+    }
+}
+}
+"
+102	"class Algo {
+public static void reverse_array(int[] a, int n) {
+    if (a == null) return;
+    int i = 0;
+    int j = Math.min(n, a.length) - 1;
+    while (i < j) {
+        int t = a[i];
+        a[i] = a[j];
+        a[j] = t;
+        i++;
+        j--;
+    }
+}
+}
+"
+103	"class Algo {
+public static void reverse_array(int[] a, int n) {
+    if (a == null) return;
+    if (n < 0) n = 0;
+    int i = 0, j = Math.min(n, a.length) - 1;
+    while (i < j) {
+        int t = a[i];
+        a[i++] = a[j];
+        a[j--] = t;
+    }
+}
+}
+"
+104	"class Algo {
+public static void reverse_array(int[] a, int n) {
+    if (a == null) return;
+    if (n < 0) n = 0;
+    if (n > a.length) n = a.length;
+    for (int i = 0, j = n - 1; i < j; i++, j--) {
+        int t = a[i];
+        a[i] = a[j];
+        a[j] = t;
+    }
+}
+}
+"
+105	"class Algo {
+public static void reverse_array(int[] a, int n) {
+    if (n <= 1) return;
+    final int limit = n >> 1;
+    final java.util.function.IntConsumer[] rec = new java.util.function.IntConsumer[1];
+    rec[0] = i -> {
+        if (i >= limit) return;
+        int j = n - 1 - i;
+        int tmp = a[i];
+        a[i] = a[j];
+        a[j] = tmp;
+        rec[0].accept(i + 1);
+    };
+    rec[0].accept(0);
+}
+}
+"
+106	"class Algo {
+public static void reverse_array(int[] a, int n) {
+    if (a == null || n <= 1) return;
+    int len = Math.min(n, a.length);
+    boolean[] visited = new boolean[len];
+    for (int i = 0; i < len; i++) {
+        if (visited[i]) continue;
+        int j = len - 1 - i;
+        if (j == i) {
+            visited[i] = true;
+        } else {
+            int tmp = a[i];
+            a[i] = a[j];
+            a[j] = tmp;
+            visited[i] = true;
+            visited[j] = true;
+        }
+    }
+}
+}
+"
+107	"class Algo {
+public static void reverse_array(int[] a, long n) {
+    if (a == null) return;
+    if (n > a.length) n = a.length;
+    if (n <= 1) return;
+    long left = a.length - n;
+    long right = n - 1;
+    if (left >= right) return;
+    int i = (int) left;
+    int j = (int) right;
+    int tmp = a[i];
+    a[i] = a[j];
+    a[j] = tmp;
+    reverse_array(a, n - 1);
+}
+}
+"
+108	"class Algo {
+public static void reverse_array(int[] a, int n) {
+    if (a == null || n <= 1) return;
+    if (n > a.length) n = a.length;
+    int[] tmp = new int[n];
+    for (int i = 0; i < n; i++) {
+        tmp[i] = a[n - 1 - i];
+    }
+    System.arraycopy(tmp, 0, a, 0, n);
+}
+}
+"
+109	"class Algo {
+public static void reverse_array(int[] a, int n) {
+    if (a == null) return;
+    int len = n;
+    if (len > a.length) len = a.length;
+    if (len <= 1) return;
+    for (int i = 0, j = len - 1; i < j; i++, j--) {
+        int tmp = a[i];
+        a[i] = a[j];
+        a[j] = tmp;
+    }
+}
+}
+"
+110	"class Algo {
+public static void reverse_array(int[] a, long n) {
+    if (a == null) return;
+    int len = (int) Math.min((long) a.length, Math.max(0L, Math.min(n, (long) Integer.MAX_VALUE)));
+    for (int i = 0, j = len - 1; i < j; i++, j--) {
+        int t = a[i];
+        a[i] = a[j];
+        a[j] = t;
+    }
+}
+}
+"
+111	"class Algo {
+public static int rotl32(int x, int r) {
+    int s = r & 31;
+    long v = ((x & 0xFFFFFFFFL) << 32) | (x & 0xFFFFFFFFL);
+    return (int)((v << s) >>> 32);
+}
+}
+"
+112	"class Algo {
+public static int rotl32(int x, int r) {
+    int s = r & 31;
+    return (x << s) | (x >>> (32 - s));
+}
+}
+"
+113	"public class Algo {
+    public static int rotl32(int x, int r) {
+        int s = r & 31;
+        long y = x & 0xffffffffL;
+        long z = (y << 32) | y;
+        return (int)((z << s) >>> 32);
+    }
+}
+"
+114	"class Algo {
+public static int rotl32(int x, int r) {
+    int s = r & 31;
+    long u = x & 0xFFFF_FFFFL;
+    long d = (u << 32) | u;
+    return (int) ((d << s) >>> 32);
+}
+}
+"
+115	"public class Algo {
+    public static int rotl32(int x, int r) {
+        int s = r & 31;
+        return (x << s) | (x >>> (-s & 31));
+    }
+}
+"
+116	"class Algo {
+public static int rotl32(int x, int r) {
+    int s = r & 31;
+    long ux = x & 0xFFFFFFFFL;
+    long a = ux << s;
+    return (int) ((a & 0xFFFFFFFFL) | (a >>> 32));
+}
+}
+"
+117	"class Algo {
+public static int rotl32(int x, int r) {
+    r &= 31;
+    if (r == 0) return x;
+    int y = (x << 1) | (x >>> 31);
+    return rotl32(y, r - 1);
+}
+}
+"
+118	"class Algo {
+public static int rotl32(int x, int r) {
+    int n = r & 31;
+    while (n-- != 0) {
+        x = (x << 1) | (x >>> 31);
+    }
+    return x;
+}
+}
+"
+119	"class Algo {
+public static int rotl32(int x, int r) {
+    int n = r & 31;
+    return (x << n) | (x >>> (32 - n));
+}
+}
+"
+120	"class Algo {
+public static int rotl32(int x, int r) {
+    long z = x & 0xFFFFFFFFL;
+    int s = r & 31;
+    long y = (z << 32) | z;
+    return (int) ((y >>> (32 - s)) & 0xFFFFFFFFL);
+}
+}
+"
+121	"class Algo {
+public static int rotl32(int x, int r) {
+    return (x << r) | (x >>> -r);
+}
+}
+"
+122	"class Algo {
+public static int rotl32(int x, int r) {
+    int s = r & 31;
+    long u = x & 0xFFFFFFFFL;
+    long t = (u << 32) | u;
+    return (int)((t >>> (32 - s)) & 0xFFFFFFFFL);
+}
+}
+"
+123	"class Algo {
+public static int rotl32(int x, int r) {
+    r &= 31;
+    if (r == 0) return x;
+    int rotated = (x << 1) | ((x >>> 31) & 1);
+    return rotl32(rotated, r - 1);
+}
+}
+"
+124	"public class Algo {
+    public static int rotl32(int x, int r) {
+        int n = r & 31;
+        return (x << n) | (x >>> (32 - n));
+    }
+}
+"
+125	"class Algo {
+public static int rotl32(int x, int r) {
+    int s = r & 31;
+    int y = x;
+    if ((s & 1) != 0) y = (y << 1) | (y >>> 31);
+    if ((s & 2) != 0) y = (y << 2) | (y >>> 30);
+    if ((s & 4) != 0) y = (y << 4) | (y >>> 28);
+    if ((s & 8) != 0) y = (y << 8) | (y >>> 24);
+    if ((s & 16) != 0) y = (y << 16) | (y >>> 16);
+    return y;
+}
+}
+"
+126	"class Algo {
+public static int str_len(String s) {
+    if (s == null) return 0;
+    int i = 0, n = s.length();
+    while (i < n && s.charAt(i) != '\0') i++;
+    return i;
+}
+}
+"
+127	"class Algo {
+public static int str_len(String s) {
+    int i = s.indexOf('\0');
+    return i >= 0 ? i : s.length();
+}
+}
+"
+128	"class Algo {
+public static long str_len(char[] s) {
+    if (s == null || s.length == 0 || s[0] == '\0') return 0L;
+    return 1L + str_len(java.util.Arrays.copyOfRange(s, 1, s.length));
+}
+}
+"
+129	"class Algo {
+public static int str_len(char[] s) {
+    if (s.length == 0 || s[0] == '\0') {
+        return 0;
+    }
+    char[] t = new char[s.length - 1];
+    System.arraycopy(s, 1, t, 0, s.length - 1);
+    return 1 + str_len(t);
+}
+}
+"
+130	"class Algo {
+public static int str_len(char[] s) {
+    if (s == null || s.length == 0 || s[0] == '\0') return 0;
+    return 1 + str_len(java.util.Arrays.copyOfRange(s, 1, s.length));
+}
+}
+"
+131	"public class Algo {
+    public static long str_len(char[] s) {
+        if (s == null || s.length == 0) return 0L;
+        if (s[0] == '\0') return 0L;
+        return 1L + str_len(java.util.Arrays.copyOfRange(s, 1, s.length));
+    }
+}
+"
+132	"class Algo {
+public static long str_len(final String s) {
+    if (s == null || s.isEmpty() || s.charAt(0) == '\0') return 0L;
+    return 1L + str_len(s.substring(1));
+}
+}
+"
+133	"class Algo {
+public static int str_len(char[] s) {
+    return (s.length == 0 || s[0] == '\0') ? 0 : 1 + str_len(java.util.Arrays.copyOfRange(s, 1, s.length));
+}
+}
+"
+134	"class Algo {
+public static long str_len(char[] s) {
+    return (s.length == 0 || s[0] == '\0') ? 0L : 1L + str_len(java.util.Arrays.copyOfRange(s, 1, s.length));
+}
+}
+"
+135	"class Algo {
+public static int str_len(String s) {
+    if (s.isEmpty() || s.charAt(0) == '\0') return 0;
+    return 1 + str_len(s.substring(1));
+}
+}
+"
+136	"class Algo {
+public static long sum_array(final int[] a, int n) {
+    if (n <= 0) return 0L;
+    return sum_array(a, n - 1) + (long) a[n - 1];
+}
+}
+"
+137	"class Algo {
+public static long sum_array(int[] a, int n) {
+    long sum = 0L;
+    int i = 0, j = n - 1;
+    while (i < j) {
+        sum += (long) a[i++] + a[j--];
+    }
+    if (i == j) {
+        sum += a[i];
+    }
+    return sum;
+}
+}
+"
+138	"public class Algo {
+    public static long sum_array(int[] a, int n) {
+        long sum = 0L;
+        for (int i = 0; i < n; i++) {
+            sum += a[i];
+        }
+        return sum;
+    }
+}
+"
+139	"public class Algo {
+    public static long sum_array(int[] a, int n) {
+        if (a == null || n <= 0) return 0L;
+        int m = n > a.length ? a.length : n;
+        long sum = 0L;
+        int[] ls = new int[64];
+        int[] rs = new int[64];
+        int sp = 0;
+        ls[sp] = 0;
+        rs[sp] = m;
+        sp++;
+        while (sp > 0) {
+            sp--;
+            int lo = ls[sp];
+            int hi = rs[sp];
+            int len = hi - lo;
+            if (len <= 0) continue;
+            if (len == 1) {
+                sum += a[lo];
+            } else {
+                int mid = lo + (len >>> 1);
+                ls[sp] = lo;
+                rs[sp] = mid;
+                sp++;
+                ls[sp] = mid;
+                rs[sp] = hi;
+                sp++;
+            }
+        }
+        return sum;
+    }
+}
+"
+140	"class Algo {
+public static long sum_array(int[] a, int n) {
+    if (a == null || n <= 0) return 0L;
+    int m = n;
+    if (m > a.length) m = a.length;
+    if (m <= 0) return 0L;
+    return sum_array(a, m - 1) + (long) a[m - 1];
+}
+}
+"
+141	"class Algo {
+public static long sum_array(int[] a, long n) {
+    if (a == null || n <= 0) return 0L;
+    int m = (int) Math.min((long) a.length, Math.min(n, (long) Integer.MAX_VALUE));
+    if (m <= 0) return 0L;
+    long sum = 0L;
+    final int THRESH = 2048;
+    if (m <= THRESH) {
+        for (int i = 0; i < m; i++) sum += a[i];
+        return sum;
+    }
+    int[] sL = new int[64];
+    int[] sR = new int[64];
+    int sp = 0;
+    int l = 0, r = m;
+    while (true) {
+        int len = r - l;
+        if (len <= THRESH) {
+            long local = 0L;
+            for (int i = l; i < r; i++) local += a[i];
+            sum += local;
+            if (sp == 0) break;
+            --sp;
+            l = sL[sp];
+            r = sR[sp];
+        } else {
+            int mid = l + (len >>> 1);
+            sL[sp] = mid;
+            sR[sp] = r;
+            sp++;
+            r = mid;
+        }
+    }
+    return sum;
+}
+}
+"
+142	"class Algo {
+public static long sum_array(int[] a, int n) {
+    if (n <= 0) return 0L;
+    long[] buf = new long[n];
+    for (int i = 0; i < n; i++) buf[i] = a[i];
+    int m = n;
+    while (m > 1) {
+        int k = 0, i = 0;
+        for (; i + 1 < m; i += 2) buf[k++] = buf[i] + buf[i + 1];
+        if (i < m) buf[k++] = buf[i];
+        m = k;
+    }
+    return buf[0];
+}
+}
+"
+143	"class Algo {
+public static long sum_array(int[] a, int n) {
+    long sum = 0L;
+    for (int i = 0; i < n; i++) {
+        sum += a[i];
+    }
+    return sum;
+}
+}
+"
+144	"class Algo {
+public static long sum_array(int[] a, int n) {
+    return n <= 0 ? 0L : sum_array(a, n - 1) + a[n - 1];
+}
+}
+"
+145	"class Algo {
+public static long sum_array(final int[] a, long n) {
+    if (a == null || n <= 0) return 0L;
+    int len = a.length;
+    if (n > len) n = len;
+    int m = (int) n;
+    if (m == 0) return 0L;
+    return sum_array(a, m - 1) + (long) a[m - 1];
+}
+}
+"
+146	"class Algo {
+public static long sum_array(int[] a, int n) {
+    if (a == null || n <= 0) return 0L;
+    if (n > a.length) n = a.length;
+    return sum_array(a, n - 1) + a[n - 1];
+}
+}
+"
+147	"class Algo {
+public static long sum_array(int[] a, int n) {
+    int m = a == null ? 0 : Math.min(n, a.length);
+    long sum = 0L;
+    int i = 0, j = m - 1;
+    while (i < j) {
+        sum += (long) a[i++] + (long) a[j--];
+    }
+    if (i == j) sum += a[i];
+    return sum;
+}
+}
+"
+148	"public class Algo {
+    public static long sum_array(int[] a, long n) {
+        if (n <= 0) return 0L;
+        return sum_array(a, n - 1) + (long) a[(int)(n - 1)];
+    }
+}
+"
+149	"class Algo {
+public static long sum_array(int[] a, long n) {
+    int len = a == null ? 0 : (int) Math.min(n, (long) a.length);
+    long sum = 0L;
+    int i = 0, j = len - 1;
+    while (i < j) {
+        sum += (long) a[i++] + (long) a[j--];
+    }
+    if (i == j) {
+        sum += a[i];
+    }
+    return sum;
+}
+}
+"
+150	"class Algo {
+public static long sum_array(int[] a, long n) {
+    if (a == null || n <= 0) return 0L;
+    int len = n < a.length ? (int) n : a.length;
+    return java.util.Arrays.stream(a, 0, len).asLongStream().sum();
+}
+}
+"
