@@ -1,5 +1,20 @@
 # -*- coding: utf-8 -*-
 """
+[EN]
+Production-grade C++ preprocessor for ASTNN powered by tree-sitter.
+
+Public APIs:
+  - get_sequences_cpp(code: str, out: list[str]) -> None
+  - get_blocks_cpp(code: str) -> list[Node]   # Node is a simple tree node with .token and .children
+
+Notes:
+  * To stay consistent with the Word2Vec/vocabulary, tokens are based on “type name + normalized literal”:
+    identifiers → 'id', numbers → 'num', string literals → 'str'.
+  * Insert 'End' at the end of compound-statement–like constructs to follow the sequencing
+    convention used by ASTNN (C version).
+"""
+"""
+[JA]
 Production-grade C++ preprocessor for ASTNN using tree-sitter.
 提供API:
   - get_sequences_cpp(code: str, out: list[str]) -> None

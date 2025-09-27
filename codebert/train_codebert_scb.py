@@ -1,6 +1,58 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
+[EN]
+Train/evaluate CodeBERT for clone detection using:
+  - programs.pkl : DataFrame('id','code','label' optional)
+  - oj_clone_ids.pkl : DataFrame('id1','id2','label')  # 1=clone, 0=non-clone
+
+Modes
+-----
+  --mode biencoder    : contrastive fine-tuning (for dense retrieval)
+  --mode crossencoder : pair classification (high-accuracy classifier)
+
+Evaluator
+---------
+  - On validation, search the smallest τ* that satisfies P >= target_precision.
+  - On test/transfer, keep τ* fixed and report P/R/F1 at τ* and PR-AUC.
+
+Saves
+-----
+  - out_dir/encoder_best.pt   (bi-encoder)  or  out_dir/clf_best.pt (cross-encoder)
+  - out_dir/valid_metrics.json  (includes tau_star)
+  - out_dir/test_metrics.json   (if available)
+
+
+# 1) Preparation: create training data from Stand_Alone_Clones
+#    (use the provided build_programs_and_pairs script)
+pipenv run python \
+  ../HySCU/create_dataset/scripts/make_programs_and_pairs.py \
+  --src ~/HySCU/semanticclonebench/Python/Stand_Alone_Clones/ \
+  --out-dir codebert/data/semanticclonebench/python \
+  --make-pairs --neg-per-pos 4
+
+# Outputs: data_c/programs.pkl, data_c/oj_clone_ids.pkl
+
+# 2) Training (bi-encoder; does an internal 9:1 split)
+python train_codebert_scb.py \
+  --prog_pkl data_c/programs.pkl \
+  --pairs_train_pkl data_c/oj_clone_ids.pkl \
+  --out_dir out_bi_c \
+  --mode biencoder \
+  --epochs 3 --batch_size 64 --lr 2e-5 --max_len 256 \
+  --valid_ratio 0.1
+
+# 3) Training (cross-encoder; if you provide an externally prepared 9:1 split)
+python train_codebert_scb.py \
+  --prog_pkl data_all/programs_all.pkl \
+  --pairs_train_pkl data_all/pairs_all.pkl \
+  --out_dir out_multi_bi \
+  --mode crossencoder \
+  --epochs 3 --batch_size 64 --lr 2e-5 --max_len 256 \
+  --valid_ratio 0.1
+"""
+"""
+[JA]
 Train/evaluate CodeBERT for clone detection using
   - programs.pkl : DataFrame('id','code','label(任意)')
   - oj_clone_ids.pkl : DataFrame('id1','id2','label')  # 1=clone, 0=non-clone

@@ -1,12 +1,12 @@
 '''
-# C++ 学習済み（ASTNN-cpp）の Word2Vec / 重みを指定
+# Specify pretrained Word2Vec and model weights for ASTNN-cpp (C++)
 pipenv run python clone/eval_mysql_cpp.py \
   --cands-dir ~/HySCU/create_dataset/out/candidates_mysql \
   --judged ~/HySCU/create_dataset/out/candidates_mysql/judged.jsonl \
   --lang-root data/cpp \
   --embedding-dim 128 \
   --weights models/astnn_cpp.pt \
-  --threshold 0.5292 \            # ← 学習/検証で得た best-F1 閾値を固定（推奨）
+  --threshold 0.5292 \           
   --blocks-func prepare_data_cpp:get_blocks_cpp \
   --out-json mysql_cpp_metrics.json \
   --out-csv mysql_cpp_scores.csv \

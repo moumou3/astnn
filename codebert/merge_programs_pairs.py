@@ -1,6 +1,29 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
+[EN]
+Merge multiple per-language programs.pkl (id, code, optional label) and
+oj_clone_ids.pkl (id1, id2, label) into a single programs_all.pkl / pairs_all.pkl.
+
+Rules
+- For each language, first convert ids to a composite key 'LANG:oldid',
+  then remap to a new global sequential id space.
+- Treat (id1,id2) and (id2,id1) as duplicates; keep a single unordered pair.
+- --balance-per-lang : downsample so that the number of positive pairs is equal across languages.
+- --add-cross-lang-neg N : for each positive pair, add N negative pairs drawn across *different* languages.
+
+Example: merge outputs from C, C++, Java, and Python
+  python merge_programs_pairs.py \
+    --lang C      --prog data_c/programs.pkl      --pairs data_c/oj_clone_ids.pkl \
+    --lang CPP    --prog data_cpp/programs.pkl    --pairs data_cpp/oj_clone_ids.pkl \
+    --lang Java   --prog data_java/programs.pkl   --pairs data_java/oj_clone_ids.pkl \
+    --lang Python --prog data_py/programs.pkl     --pairs data_py/oj_clone_ids.pkl \
+    --out_dir data_all \
+    --balance-per-lang \
+    --add-cross-lang-neg 1
+"""
+"""
+[JA]
 複数言語の programs.pkl（id,code, label任意）と oj_clone_ids.pkl（id1,id2,label）を
 1つの programs_all.pkl / pairs_all.pkl に統合する。
 

@@ -2,6 +2,91 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
+[EN]
+Utility: From ASTNN / arbitrary predicted-score CSV → build Gold → output PR curve & Best-F1
+===========================================================================================
+
+This script evaluates a pairwise score CSV (id1,id2,score) by:
+- Automatically building a **Gold** set (positives = all function pairs within the same file), and
+- Producing a **PR curve** (CSV) plus summary metrics (JSON) including Best-F1 and PR-AUC.
+
+Intended use
+------------
+- Evaluate CSV predictions of the form `id1,id2,score` from ASTNN or any similarity/classifier.
+- You have an id→file mapping (`id_map.csv`), **or** you can assume “two functions per file” (`--two-per-file`).
+- If you have function length info (via `programs.pkl`), you can exclude short functions when making Gold using `--min-lines`.
+
+I/O
+---
+[Inputs]
+- --pred       : prediction CSV with columns: id1,id2,score
+- --idmap      : (recommended) id_map.csv with columns: id,file[,len]
+                 If a `len` column exists, it is used as the function length.
+                 If absent, use `--two-per-file` (assumes file_id = (id-1)//2).
+- --programs   : (optional) programs.pkl (pandas DataFrame with columns: id,code[,label])
+                 If `len` is missing/NaN, compute and fill from **non-blank code line count** here.
+- --two-per-file : use the “two functions per file” assumption when no id_map.csv is provided.
+- --min-lines  : minimum function length to include in Gold (default = 12).
+                 (Set to -1 and tweak the code if you want to disable.)
+
+[Outputs]
+- --out-json : a metrics JSON, e.g.:
+  {
+    "num_functions_kept": ...,
+    "total_gold_pairs": ...,
+    "num_pred_pairs_in": ...,
+    "num_pred_pairs_resolved": ...,
+    "pr_auc": ...,
+    "best_f1": { "threshold": t, "precision": P, "recall": R, "f1": F1, "tp": TP, "fp": FP, "fn": FN },
+    "f1_95_band": {"f_min": ..., "f_max": ..., "threshold_min": ..., "threshold_max": ..., "ratio": 0.95 },
+    "note": "Provenance of Gold / preprocessing notes"
+  }
+
+- --out-pr   : PR-curve CSV with columns: threshold,tp,fp,fn,precision,recall,f1
+               (compressed to unique score thresholds)
+
+Definition of Gold (important)
+------------------------------
+- For each file, **all pairwise combinations** among its functions are Gold positives.
+- The id→file mapping comes from `--idmap`, or from `--two-per-file` via the rule (id-1)//2.
+- With `--min-lines`, exclude short functions **before** building Gold
+  (based on `len` from id_map.csv or the non-blank line count computed from programs.pkl).
+
+Notes
+-----
+- If the prediction CSV includes duplicate pairs, keep **only the highest score** per unordered pair for evaluation.
+- Any id not present in the Gold universe (e.g., missing in id_map or filtered out) is ignored for evaluation.
+- PR-AUC is computed with a simple trapezoidal rule along the recall axis.
+
+Examples
+--------
+1) id_map.csv available and includes `len`:
+  $ python eval_astnn_metrics.py \
+      --pred astnn_pred.csv \
+      --idmap id_map.csv \
+      --min-lines 12 \
+      --out-json metrics.json \
+      --out-pr   pr_curve.csv
+
+2) id_map.csv lacks `len`, compute from programs.pkl:
+  $ python eval_astnn_metrics.py \
+      --pred astnn_pred.csv \
+      --idmap id_map.csv \
+      --programs programs.pkl \
+      --min-lines 12 \
+      --out-json metrics.json \
+      --out-pr   pr_curve.csv
+
+3) No id_map.csv; assume “two per file” (ids 1–2 → file0, 3–4 → file1, ...):
+  $ python eval_astnn_metrics.py \
+      --pred astnn_pred.csv \
+      --two-per-file \
+      --min-lines 12 \
+      --out-json metrics.json \
+      --out-pr   pr_curve.csv
+"""
+"""
+[JA]
 ASTNN/任意予測スコアCSV → Gold生成 → PR曲線/Best-F1 を出すユーティリティ
 ======================================================================
 

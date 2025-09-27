@@ -1,5 +1,115 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+"""
+[EN] Compute PR curve & metrics from pairwise scores (id1,id2,score)
+-------------------------------------------------------------------
+Overview
+- Reads a score CSV (id1,id2,score[ ,label]) and (optionally) a block labels file
+  (blocks.pkl with id1,id2,label). If the score CSV already has a `label` column,
+  it is used directly; otherwise labels are merged from blocks.pkl.
+- Normalizes unordered pairs (id1<id2) and, for duplicate pairs, keeps the row with
+  the **highest score**. Pairs without labels after merging are dropped.
+- Sweeps thresholds in **descending score order** to build a compressed PR curve
+  (unique thresholds), computes Best-F1 and PR-AUC (trapezoid on recall), and
+  optionally evaluates at a fixed threshold (if --threshold is provided).
+- Writes:
+  - PR curve to CSV (columns: threshold,tp,fp,fn,precision,recall,f1)
+  - Summary metrics to JSON (used_threshold, precision, recall, f1, pr_auc, best_f1, counts)
+  - Prints the same metrics JSON to stdout.
+
+Inputs
+- --scores         : eval_scores.csv with columns: id1,id2,score[,label]
+- --labels-blocks  : (optional) blocks.pkl with columns: id1,id2,label
+                     (required if --scores has no label column)
+- --threshold      : (optional) fixed decision threshold; if omitted, metrics are also
+                     reported for the Best-F1 threshold (as reference)
+
+Outputs
+- --out-pr    : PR curve CSV (default: pr_curve.csv)
+- --out-json  : Metrics JSON (default: metrics.json)
+
+Usage examples
+1) Labels embedded in the scores CSV
+   python compute_pr.py \
+     --scores eval_scores.csv \
+     --out-pr pr_curve.csv \
+     --out-json metrics.json
+
+2) Labels provided via blocks.pkl
+   python compute_pr.py \
+     --scores eval_scores.csv \
+     --labels-blocks blocks.pkl \
+     --out-pr pr_curve.csv \
+     --out-json metrics.json
+
+3) Evaluate at a fixed threshold (e.g., transferred from validation)
+   python compute_pr.py \
+     --scores eval_scores.csv \
+     --labels-blocks blocks.pkl \
+     --threshold 0.70 \
+     --out-pr pr_curve.csv \
+     --out-json metrics.json
+
+Notes
+- Pair identity is made order-invariant by sorting (id1<id2).
+- Duplicate predicted pairs: only the **max score** per pair is retained.
+- PR-AUC uses a simple trapezoidal rule over recall.
+- Dependencies: numpy, pandas, scikit-learn.
+
+-------------------------------------------------------------------
+
+[JA] ペアスコアから PR 曲線と指標を計算するツール（id1,id2,score）
+---------------------------------------------
+概要
+- スコア CSV（id1,id2,score[,label]）を読み込み、（必要なら）blocks.pkl（id1,id2,label）
+  からラベルをマージします。scores に label 列があればそれをそのまま使用します。
+- ペアは順序を正規化（id1<id2）。重複ペアは **最高スコア** の1件だけ残します。
+- スコア降順でしきい値を掃引し、ユニークなしきい値で圧縮した PR 曲線を生成。
+  Best-F1 と PR-AUC（recall 軸での台形近似）を計算します。
+- 出力:
+  - PR 曲線 CSV（列: threshold,tp,fp,fn,precision,recall,f1）
+  - 指標 JSON（used_threshold, precision, recall, f1, pr_auc, best_f1, 件数など）
+  - 同じ JSON を標準出力にも表示
+
+入力
+- --scores         : eval_scores.csv（列: id1,id2,score[,label]）
+- --labels-blocks  : blocks.pkl（列: id1,id2,label）
+                     ※scores に label が無い場合に必須
+- --threshold      : 固定しきい値（任意）。未指定時は Best-F1 の値も参考として出力
+
+出力
+- --out-pr    : PR 曲線 CSV（既定: pr_curve.csv）
+- --out-json  : 指標 JSON（既定: metrics.json）
+
+使い方例
+1) scores に label 列がある場合
+   python compute_pr.py \
+     --scores eval_scores.csv \
+     --out-pr pr_curve.csv \
+     --out-json metrics.json
+
+2) blocks.pkl からラベルを与える場合
+   python compute_pr.py \
+     --scores eval_scores.csv \
+     --labels-blocks blocks.pkl \
+     --out-pr pr_curve.csv \
+     --out-json metrics.json
+
+3) 固定しきい値で評価（例：検証で決めた 0.70）
+   python compute_pr.py \
+     --scores eval_scores.csv \
+     --labels-blocks blocks.pkl \
+     --threshold 0.70 \
+     --out-pr pr_curve.csv \
+     --out-json metrics.json
+
+補足
+- ペア同一性は (id1<id2) 化で順序非依存に統一。
+- 重複予測は最高スコアのみ採用。
+- PR-AUC は recall 軸での台形近似。
+- 依存ライブラリ: numpy, pandas, scikit-learn。
+"""
+
 import argparse, os, json
 import numpy as np
 import pandas as pd

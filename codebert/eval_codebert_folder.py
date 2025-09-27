@@ -10,7 +10,7 @@ on folder-structured datasets:
 - Different <ALGO> folders -> negative (label=0), sampled via --neg-per-pos
 - Per language, report best-F1 threshold (τ_F1), F1_max and PR-AUC.
 - Save PR curve as CSV per language (out_dir/pr_curve_<mode>_<LANG>.csv)
-- NEW: Recall@P（既定 P=0.90）を算出・保存
+- NEW: Save Recall@P（既定 P=0.90）
 
 Usage:
   python eval_codebert_folder.py --root create_dataset/dataset \
